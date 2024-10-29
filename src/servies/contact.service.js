@@ -4,15 +4,16 @@ class ContactService {
         this.api = createApiClient(baseUrl);
     }
     async getAll() {
-        return await this.api.get('/').data;
+        return (await this.api.get('/')).data;
     }
     async create(data) {
-        return await this.api.post('/', data).data;
+        return (await this.api.post('/', data)).data;
     }
     async deleteAll() {
-        return await this.api.delete('/').data;
+        return (await this.api.delete('/')).data;
     }
     async get(id) {
+        console.log('id get detail: ', id);
         return (await this.api.get(`/${id}`)).data;
     }
     async update(id, data) {
@@ -22,5 +23,4 @@ class ContactService {
         return (await this.api.delete(`/${id}`)).data;
     }
 }
-
 export default new ContactService();

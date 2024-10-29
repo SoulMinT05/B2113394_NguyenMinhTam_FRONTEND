@@ -1,14 +1,8 @@
 <script>
 export default {
     props: {
-        contacts: {
-            type: Array,
-            default: [],
-        },
-        activeIndex: {
-            type: Number,
-            default: -1,
-        },
+        contacts: { type: Array, default: [] },
+        activeIndex: { type: Number, default: -1 },
     },
     emits: ['update:activeIndex'],
     methods: {
@@ -18,7 +12,6 @@ export default {
     },
 };
 </script>
-
 <template>
     <ul class="list-group">
         <li
