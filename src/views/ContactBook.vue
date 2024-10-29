@@ -66,26 +66,20 @@ export default {
     },
     watch: {
         searchText() {
-            this.activeIndex = -1;
+            this.activeIndex = -1; // Đặt lại activeIndex khi tìm kiếm
         },
     },
     computed: {
-        contactStrings() {
-            return this.contacts.map((contact) => {
-                const { name, email, address, phone } = contact;
-                return [name, email, address, phone].join('');
-            });
-        },
         filteredContacts() {
             if (!this.searchText) return this.contacts;
-            return this.contacts.filter((_contact, index) => {
-                this.contactStrings[index].includes(this.searchText);
+
+            const lowerCaseSearchText = this.searchText.toLowerCase(); // Chuyển đổi về chữ thường để tìm kiếm không phân biệt
+            return this.contacts.filter((contact) => {
+                return contact.name.toLowerCase().includes(lowerCaseSearchText); // Tìm kiếm chỉ theo tên
             });
         },
         activeContact() {
             if (this.activeIndex < 0) return null;
-            const contact = this.filteredContacts[this.activeIndex];
-            console.log('activeContact: ', contact);
             return this.filteredContacts[this.activeIndex];
         },
         filteredContactsCount() {
@@ -96,7 +90,7 @@ export default {
         async retrieveContacts() {
             try {
                 this.contacts = await ContactService.getAll();
-                console.log('this.contactsGeAll: ', this.contacts);
+                console.log('this.contactsGetAll: ', this.contacts);
             } catch (error) {
                 console.log(error);
             }
